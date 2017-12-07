@@ -1,0 +1,19 @@
+<div class="container">
+  <h3 class="blue">Login</h3>
+  <div *ngIf="isError" class="alert alert-danger">{{errorMessage}}</div>
+  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" nonvalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <input type="text" class="form-control" [(ngModel)]="model.username" name="username" #username="ngModel" autocapitalize="off"
+        autocorrect="off" placeholder="username" required/>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <input type="password" class="form-control" [(ngModel)]="model.password" name="password" #password="ngModel" placeholder="password"
+        required>
+      <div *ngIf="f.submitted && !password.valid" class="help-clock">Password is required</div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary btn-block">Login</button>
+    </div>
+    <a class="btn btn-success btn-block" href="#/register">Register</a>
+  </form>
+</div>

@@ -3,18 +3,26 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
 ## Packages to install
-Run at project level
+>Run at project level
 
-npm install --save bootstrap@4.0.0-alpha.6 
-npm install --save jquery 
-npm install --save font-awesome
-npm install --save underscore
-npm install --save @types/underscore
 
---save update bower.json
+```
+$ npm install --save bootstrap@3 
+$ npm install --save popper.js
+$ npm install --save jquery 
+$ npm install --save font-awesome
+$ npm install --save underscore
+$ npm install --save @types/underscore
+$ npm install --save ng2-modal
+$ npm install --save ng2-validation
+```
+Note: 
+	* --save update bower.json
+	* To uninstall, use npm uninstall --save <module-name>
 
 ### Update /* angular-cli.json */
 
+```
 "styles": [
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -23,9 +31,11 @@ npm install --save @types/underscore
 "scripts":[
 	"../node_modules/jquery/dist/jquery.min.js",
     	"../node_modules/bootstrap/dist/js/bootstrap.min.js",
-	"../node_modules/underscore/underscore.js"
-]
+	"../node_modules/underscore/underscore.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
 
+]
+```
 
 ## Development server
 

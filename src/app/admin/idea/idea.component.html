@@ -1,0 +1,93 @@
+<div class="page-header">
+  <h1>Manage Ideas</h1>
+</div>
+<br/>
+
+<div class="row">
+  <div *ngIf="isError" class="alert alert-danger">{{errorMessage}}</div>
+  <span>
+
+    <span class="form-inline">
+      <span class="input-group add-on">
+        <input class="form-control" placeholder="Search" [(ngModel)]="model.searchText" name="srch-term" id="srch-term" type="text">
+        <div class="input-group-btn">
+          <button class="btn btn-success" type="submit" (click)="searchIdea(model.searchText)">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </span>
+    </span>
+
+    <span class="form-inline">
+      <span class="input-group add-on">
+        <select class="form-control" name="categoryId" id="categoryId" [(ngModel)]="model.categoryId" (ngModelChange)="updateSelectValue($event)">
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{category.categoryName}}</option>
+        </select>
+      </span>
+    </span>
+
+    <div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let track of results | async">
+          <img src="{{track.thumbnail}}">
+          <a target="_blank" href="{{track.link}}">{{ track.track }}
+          </a>
+        </li>
+      </ul>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-md-3 text-center">Idea Name</th>
+            <th class="col-md-3 text-center">Idea Creator</th>            
+            <th class="col-md-4 text-center">Idea Funding Amount</th>
+            <th class="col-md-* text-center">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let idea of ideas; let in = index" class="text-center">
+            <td>{{idea.ideaName}}</td>
+            <td>{{idea.ideaCreatorName}}</td>            
+            <td>{{idea.fundingAmount}}</td>
+            <td>
+              <input class="form-control" placeholder="Disable Reason(Optional)" [(ngModel)]="model.disableReason" type="text">
+              <button type="button" class="btn btn-warning fa fa-edit" (click)="editIdea(idea.ideaId,myModal)"> </button>
+              <button type="button" class="btn btn-danger fa fa-minus" (click)="deleteIdea(idea)"></button>
+              <button type="button" class="btn btn-success fa fa-check" [disabled]="!idea.disabled" (click)="enableIdea(idea.ideaId)"></button>
+              <button type="button" class="btn btn-danger fa fa-close" [disabled]="idea.disabled" (click)="disableIdea(idea.ideaId, model.disableReason)"></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br/>
+    <br/>
+
+    <div class="row">
+      <modal #myModal>
+        <modal-header>
+          <h1>Edit Idea</h1>
+        </modal-header>
+
+        <modal-content class="row">
+          <form ngForm #MyEditForm="ngForm" (ngSubmit)="onEdit()">
+
+            <div class="form-group">
+              <label class="control-label" for="ideaId">Idea Id</label>
+              <input type="text" id="ideaId" [(ngModel)]="idea.ideaId" name="editIdeaId" disabled class="form-control"
+              />
+
+            </div>
+            <div class="form-group">
+              <label for="editIdeaName" class="control-label">Idea Name</label>
+              <input type="text" id="ideaName" [(ngModel)]="idea.ideaName" name="editIdeaName" #editIdeaName="ngModel" class="form-control">
+            </div>
+
+          </form>
+        </modal-content>
+        <modal-footer>
+          <button class="btn btn-primary" [disabled]="MyEditForm.invalid" (click)="onEdit(MyEditForm);myModal.close()">Save</button>
+          <button class="btn btn-primary" (click)="myModal.close()">close</button>
+        </modal-footer>
+      </modal>
+    </div>

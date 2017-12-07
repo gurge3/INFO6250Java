@@ -1,0 +1,26 @@
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" [routerLink]="['home']">Dream Cloudsourcing</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['role']">Manage Role</a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['userManagement']">Manage User</a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['categoryManagement']">Manage Category</a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn && isAdmin" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['ideaManagement']">Manage Idea</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['register']">Register</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['login']">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="isLoggedIn" [routerLinkActive]="['active']">
+      <a class="nav-link" (click)="logOut()">LogOut</a>
+    </li>
+  </ul>
+</nav>
